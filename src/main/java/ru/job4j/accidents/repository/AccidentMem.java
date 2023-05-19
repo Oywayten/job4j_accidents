@@ -19,11 +19,7 @@ public class AccidentMem {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
     private final AtomicInteger atomicInteger = new AtomicInteger(0);
 
-    {
-        dataInit();
-    }
-
-    private void dataInit() {
+    public AccidentMem() {
         String name;
         String text;
         String address;
