@@ -50,7 +50,7 @@
                     <tbody class="table-group-divider">
                     <tr th:each="accident: ${accidents}">
                         <td>
-                            <a th:href="@{|/editAccident/${accident.id}|}"> <i class="fa fa-edit"></i> </a>
+                            <a th:href="@{|/formUpdateAccident?id=${accident.id}|}"> <i class="fa fa-edit"></i> </a>
                             <span th:text="*{accident.id}" > 1 </span>
                         </td>
                         <td th:text="*{accident.name}">
