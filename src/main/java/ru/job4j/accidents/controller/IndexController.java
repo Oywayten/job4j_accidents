@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.job4j.accidents.service.AccidentService;
 
+import static ru.job4j.accidents.util.Util.setUser;
+
 /**
  * Oywayten 19.05.2023.
  */
@@ -14,9 +16,9 @@ import ru.job4j.accidents.service.AccidentService;
 public class IndexController {
     private final AccidentService accidentService;
 
-    @GetMapping("/")
+    @GetMapping({"/", "/index", "/accidents"})
     public String index(Model model) {
-        model.addAttribute("user", "Petr Arsentev");
+        setUser(model);
         model.addAttribute("accidents", accidentService.getAll());
         return "index";
     }
