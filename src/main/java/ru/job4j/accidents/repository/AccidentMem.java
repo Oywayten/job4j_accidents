@@ -44,4 +44,8 @@ public class AccidentMem {
     public Optional<Accident> getById(int id) {
         return Optional.of(accidents.get(id));
     }
+
+    public void update(Accident accident) {
+        accidents.put(accident.getId(), accident);
+    }
 }

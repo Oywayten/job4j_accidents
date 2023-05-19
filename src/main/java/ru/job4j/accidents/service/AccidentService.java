@@ -27,4 +27,8 @@ public class AccidentService {
     public Optional<Accident> getById(int id) {
         return accidentMem.getById(id);
     }
+
+    public void update(Accident accident) {
+        accidentMem.update(accident);
+    }
 }

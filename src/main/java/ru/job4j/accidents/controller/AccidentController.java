@@ -41,4 +41,10 @@ public class AccidentController {
         model.addAttribute("accident", accidentOptional.orElseThrow());
         return "editAccident";
     }
+
+    @PostMapping("/updateAccident")
+    public String update(@ModelAttribute Accident accident) {
+        accidents.update(accident);
+        return "redirect:/index";
+    }
 }
