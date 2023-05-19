@@ -36,21 +36,12 @@ public class AccidentMem {
     }
 
     public void create(Accident accident) {
-        int id = accident.getId();
-        if (id == 0) {
-            id = atomicInteger.incrementAndGet();
-            accident.setId(id);
-        }
+        int id = atomicInteger.incrementAndGet();
+        accident.setId(id);
         accidents.put(id, accident);
     }
 
     public Optional<Accident> getById(int id) {
-        Optional<Accident> accidentOptional = Optional.empty();
-        try {
-            accidentOptional = Optional.of(accidents.get(id));
-        } catch (Exception e) {
-            log.error("Find accident by id error", e);
-        }
-        return accidentOptional;
+        return Optional.of(accidents.get(id));
     }
 }
