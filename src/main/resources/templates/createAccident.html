@@ -50,6 +50,13 @@
                         <label for="address" class="mt-3">Address <span class="red">*</span>
                             <input type="text" class="form-control" name="address" id="address">
                         </label><br/>
+                        <label for="type.id" class="mt-3">Тип <span class="red">*</span>
+                            <select class="form-control" id="type.id" name="type.id">
+                                <option th:each="type: ${types}"
+                                        th:text="${type.name}"
+                                        th:value="${type.id}"></option>
+                            </select>
+                        </label>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Save</button>
                 </form>

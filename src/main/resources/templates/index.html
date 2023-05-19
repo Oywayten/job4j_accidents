@@ -27,7 +27,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/index}"> Main page </a>
                 <a class="nav-item nav-link active" th:href="@{/accidents}"> Accidents </a>
-                <a class="nav-item nav-link" th:href="@{/addAccident}"> Add Accident </a>
+                <a class="nav-item nav-link" th:href="@{/createAccident}"> Add Accident </a>
                     <div class="nav-item nav-link" th:text="${user}">user</div>
             </div>
         </div>
@@ -45,6 +45,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Text</th>
                         <th scope="col">Address</th>
+                        <th scope="col">Type</th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -61,6 +62,9 @@
                         </td>
                         <td th:text="*{accident.address}">
                             address
+                        </td>
+                        <td th:text="*{accident.type.name}">
+                            type
                         </td>
                     </tr>
                     </tbody>

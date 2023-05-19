@@ -1,4 +1,4 @@
-package ru.job4j.accidents.model;
+package ru.job4j.accidents.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,13 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Accident {
+public class AccidentDto {
 
     @EqualsAndHashCode.Include
     private int id;
     private String name;
     private String text;
     private String address;
-    private AccidentType type;
+    private int typeId;
 }

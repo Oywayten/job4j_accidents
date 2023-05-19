@@ -2,6 +2,7 @@ package ru.job4j.accidents.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.job4j.accidents.controller.dto.AccidentDto;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.AccidentMem;
 
@@ -20,15 +21,15 @@ public class AccidentService {
         return accidentMem.getAll();
     }
 
-    public void create(Accident accident) {
-        accidentMem.create(accident);
+    public void create(AccidentDto accidentDto) {
+        accidentMem.create(accidentDto);
     }
 
     public Optional<Accident> getById(int id) {
         return accidentMem.getById(id);
     }
 
-    public void update(Accident accident) {
-        accidentMem.update(accident);
+    public void update(AccidentDto accidentDto) {
+        accidentMem.update(accidentDto);
     }
 }

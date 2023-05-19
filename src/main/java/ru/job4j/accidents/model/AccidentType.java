@@ -9,15 +9,12 @@ import lombok.NoArgsConstructor;
  * Oywayten 19.05.2023.
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Accident {
-
+public class AccidentType {
     @EqualsAndHashCode.Include
     private int id;
+
     private String name;
-    private String text;
-    private String address;
-    private AccidentType type;
 }
