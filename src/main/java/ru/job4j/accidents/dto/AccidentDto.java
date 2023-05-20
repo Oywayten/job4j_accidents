@@ -19,4 +19,5 @@ public class AccidentDto {
     private String text;
     private String address;
     private int typeId;
+    private int[] rIds;
 }

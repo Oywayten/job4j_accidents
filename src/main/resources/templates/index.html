@@ -66,6 +66,11 @@
                         <td th:text="*{accident.type.name}">
                             type
                         </td>
+                        <td>
+                            <div th:each="rule: *{accident.rules}">
+                                <span th:text="*{rule.name}"></span>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

@@ -23,12 +23,15 @@ public class AccidentService {
         String name;
         String text;
         String address;
+        int id;
+        int[] ids = new int[1];
         for (int i = 1; i < 11; i++) {
             name = String.format("%s%d", "name", i);
             text = String.format("%s%d", "text", i);
             address = String.format("%s%d", "address", i);
-            int typeId = i % 3;
-            AccidentDto accidentDto = new AccidentDto(0, name, text, address, typeId);
+            id = i % 3;
+            ids[0] = id;
+            AccidentDto accidentDto = new AccidentDto(0, name, text, address, id, ids);
             create(accidentDto);
         }
     }

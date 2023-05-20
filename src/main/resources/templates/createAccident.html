@@ -27,7 +27,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/index}"> Main page </a>
                 <a class="nav-item nav-link" th:href="@{/accidents}">Accidents</a>
-                <a class="nav-item nav-link active" th:href="@{/addAccident}"> Add Accident </a>
+                <a class="nav-item nav-link active" th:href="@{/createAccident}"> Add Accident </a>
                 <div class="nav-item nav-link" th:text="${user}">user</div>
             </div>
         </div>
@@ -55,6 +55,13 @@
                                 <option th:each="type: ${types}"
                                         th:text="${type.name}"
                                         th:value="${type.id}"></option>
+                            </select>
+                        </label><br/>
+                        <label for="rIds" class="mt-3">Статья
+                            <select class="form-control" id="rIds" name="rIds" multiple>
+                                <option th:each="rule: ${rules}"
+                                        th:text="${rule.name}"
+                                        th:value="${rule.id}"></option>
                             </select>
                         </label>
                     </div>

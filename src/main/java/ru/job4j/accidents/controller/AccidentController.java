@@ -11,6 +11,7 @@ import ru.job4j.accidents.dto.AccidentDto;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 import ru.job4j.accidents.service.AccidentTypeService;
+import ru.job4j.accidents.service.RuleService;
 
 import java.util.Optional;
 
@@ -25,10 +26,12 @@ import static ru.job4j.accidents.util.Util.setUser;
 public class AccidentController {
     private final AccidentService accidents;
     private final AccidentTypeService accidentTypeService;
+    private final RuleService ruleService;
 
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
         model.addAttribute("types", accidentTypeService.getAll());
+        model.addAttribute("rules", ruleService.getAll());
         setUser(model);
         return "createAccident";
     }
@@ -47,6 +50,7 @@ public class AccidentController {
             return goToError(model, String.format("Open edit form error for accident with id = %d", id));
         }
         model.addAttribute("types", accidentTypeService.getAll());
+        model.addAttribute("rules", ruleService.getAll());
         model.addAttribute("accident", accidentOptional.get());
         return "editAccident";
     }

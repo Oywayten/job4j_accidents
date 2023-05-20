@@ -5,22 +5,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 /**
- * Oywayten 19.05.2023.
+ * Oywayten 20.05.2023.
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Accident {
-
+public class Rule {
     @EqualsAndHashCode.Include
     private int id;
+
     private String name;
-    private String text;
-    private String address;
-    private AccidentType type;
-    private Set<Rule> rules;
 }
