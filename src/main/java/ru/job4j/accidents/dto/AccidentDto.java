@@ -1,4 +1,4 @@
-package ru.job4j.accidents.controller.dto;
+package ru.job4j.accidents.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

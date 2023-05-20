@@ -1,12 +1,11 @@
 package ru.job4j.accidents.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.job4j.accidents.controller.converter.AccidentDtoConverter;
-import ru.job4j.accidents.controller.dto.AccidentDto;
 import ru.job4j.accidents.model.Accident;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,40 +17,23 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AccidentMem {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
     private final AtomicInteger atomicInteger = new AtomicInteger(0);
-    private final AccidentDtoConverter accidentDtoConverter;
-
-    public AccidentMem(AccidentDtoConverter accidentDtoConverter) {
-        this.accidentDtoConverter = accidentDtoConverter;
-        String name;
-        String text;
-        String address;
-        for (int i = 1; i < 11; i++) {
-            name = String.format("%s%d", "name", i);
-            text = String.format("%s%d", "text", i);
-            address = String.format("%s%d", "address", i);
-            int typeId = i % 3;
-            AccidentDto accidentDto = new AccidentDto(0, name, text, address, typeId);
-            create(accidentDto);
-        }
-    }
 
     public Collection<Accident> getAll() {
         return accidents.values();
     }
 
-    public void create(AccidentDto accidentDto) {
-        Accident accident = accidentDtoConverter.convertToAccident(accidentDto);
+    public void create(Accident newAccident) {
         int id = atomicInteger.incrementAndGet();
-        accident.setId(id);
-        accidents.put(id, accident);
+        newAccident.setId(id);
+        accidents.put(id, newAccident);
     }
 
     public Optional<Accident> getById(int id) {
-        return Optional.of(accidents.get(id));
+        return Optional.ofNullable(accidents.get(id));
     }
 
-    public void update(AccidentDto accidentDto) {
-        Accident accident = accidentDtoConverter.convertToAccident(accidentDto);
-        accidents.put(accident.getId(), accident);
+    public boolean update(Accident newAccident) {
+        Accident accident = accidents.computeIfPresent(newAccident.getId(), (integer, accident1) -> newAccident);
+        return Objects.equals(accident, newAccident);
     }
 }

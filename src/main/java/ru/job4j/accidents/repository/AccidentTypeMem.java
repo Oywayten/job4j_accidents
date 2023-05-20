@@ -3,9 +3,8 @@ package ru.job4j.accidents.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -13,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Repository
 public class AccidentTypeMem {
-    private final List<AccidentType> types = new ArrayList<>();
+    private final Map<Integer, AccidentType> types = new ConcurrentHashMap<>();
     private final AtomicInteger atomicInteger = new AtomicInteger(0);
 
     public AccidentTypeMem() {
@@ -24,14 +23,14 @@ public class AccidentTypeMem {
 
     public void add(String name) {
         AccidentType newAccidentType = new AccidentType(atomicInteger.getAndIncrement(), name);
-        types.add(newAccidentType);
+        types.put(newAccidentType.getId(), newAccidentType);
     }
 
-    public List<AccidentType> getAll() {
-        return types;
+    public Collection<AccidentType> getAll() {
+        return types.values();
     }
 
     public Optional<AccidentType> getById(int id) {
-        return Optional.of(types.get(id));
+        return Optional.ofNullable(types.get(id));
     }
 }

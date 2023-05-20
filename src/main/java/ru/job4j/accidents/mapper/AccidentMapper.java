@@ -1,8 +1,8 @@
-package ru.job4j.accidents.controller.converter;
+package ru.job4j.accidents.mapper;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.job4j.accidents.controller.dto.AccidentDto;
+import ru.job4j.accidents.dto.AccidentDto;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.AccidentTypeMem;
@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 @Component
 @AllArgsConstructor
-public class AccidentDtoConverter {
+public class AccidentMapper {
     private final AccidentTypeMem accidentTypeMem;
     public Accident convertToAccident(AccidentDto accidentDto) {
         Accident accident = new Accident();
@@ -24,7 +24,7 @@ public class AccidentDtoConverter {
         accident.setAddress(accidentDto.getAddress());
         int typeId = accidentDto.getTypeId();
         Optional<AccidentType> accidentTypeOptional = accidentTypeMem.getById(typeId);
-        accident.setType(accidentTypeOptional.orElseThrow());
+        accidentTypeOptional.ifPresent(accident::setType);
         return accident;
     }
 }

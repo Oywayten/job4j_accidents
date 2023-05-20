@@ -13,4 +13,9 @@ public final class Util {
     public static void setUser(Model model) {
         model.addAttribute("user", "Petr Arsentev");
     }
+
+    public static String goToError(Model model, String message) {
+        model.addAttribute("message", message);
+        return "/error";
+    }
 }

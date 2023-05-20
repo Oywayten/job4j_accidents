@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.AccidentTypeMem;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Oywayten 19.05.2023.
@@ -15,7 +15,7 @@ import java.util.List;
 public class AccidentTypeService {
     private final AccidentTypeMem accidentTypeMem;
 
-    public List<AccidentType> getAll() {
+    public Collection<AccidentType> getAll() {
         return accidentTypeMem.getAll();
     }
 }
