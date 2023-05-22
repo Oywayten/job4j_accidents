@@ -51,14 +51,14 @@
                             <input type="text" class="form-control" name="address" id="address" required>
                         </label><br/>
                         <label for="typeId" class="mt-3">Тип <span class="red">*</span>
-                            <select class="form-control" id="typeId" name="typeId">
+                            <select class="form-control" id="typeId" name="typeId" required>
                                 <option th:each="type: ${types}"
                                         th:text="${type.name}"
                                         th:value="${type.id}"></option>
                             </select>
                         </label><br/>
-                        <label for="rIds" class="mt-3">Статья
-                            <select class="form-control" id="rIds" name="rIds" multiple>
+                        <label for="rIds" class="mt-3">Статья <span class="red">*</span>
+                            <select class="form-control" id="rIds" name="rIds" multiple required>
                                 <option th:each="rule: ${rules}"
                                         th:text="${rule.name}"
                                         th:value="${rule.id}"></option>

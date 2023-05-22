@@ -1,6 +1,6 @@
 package ru.job4j.accidents.controller;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +22,18 @@ import static ru.job4j.accidents.util.Util.setUser;
  * Oywayten 19.05.2023.
  */
 @Controller
-@AllArgsConstructor
 public class AccidentController {
-    private final AccidentService accidents;
+    private final AccidentService accidentService;
     private final AccidentTypeService accidentTypeService;
     private final RuleService ruleService;
+
+    public AccidentController(@Qualifier("accidentMemService") AccidentService accidentService,
+                              @Qualifier("accidentTypeMemService") AccidentTypeService accidentTypeService,
+                              @Qualifier("ruleMemService") RuleService ruleService) {
+        this.accidentService = accidentService;
+        this.accidentTypeService = accidentTypeService;
+        this.ruleService = ruleService;
+    }
 
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
@@ -38,13 +45,13 @@ public class AccidentController {
 
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute AccidentDto accidentDto) {
-        accidents.create(accidentDto);
+        accidentService.create(accidentDto);
         return "redirect:/index";
     }
 
     @GetMapping("/formUpdateAccident")
     public String viewEditAccident(Model model, @RequestParam int id) {
-        Optional<Accident> accidentOptional = accidents.getById(id);
+        Optional<Accident> accidentOptional = accidentService.getById(id);
         setUser(model);
         if (accidentOptional.isEmpty()) {
             return goToError(model, String.format("Open edit form error for accident with id = %d", id));
@@ -57,7 +64,7 @@ public class AccidentController {
 
     @PostMapping("/updateAccident")
     public String update(Model model, @ModelAttribute AccidentDto accidentDto) {
-        if (!accidents.update(accidentDto)) {
+        if (!accidentService.update(accidentDto)) {
             setUser(model);
             return goToError(model, String.format("Open edit form error for accident with id = %d", accidentDto.getId()));
         }

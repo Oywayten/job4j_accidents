@@ -33,7 +33,7 @@
         </div>
     </nav>
     <div class="row">
-        <div class="card text-bg-dark col-sm-9">
+        <div class="card text-bg-dark col-sm-10">
             <div class="card-header">
                 <h2 class="card-title fw-bold">Accident Project</h2>
             </div>
@@ -46,15 +46,16 @@
                         <th scope="col">Text</th>
                         <th scope="col">Address</th>
                         <th scope="col">Type</th>
+                        <th scope="col">Rules</th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
                     <tr th:each="accident: ${accidents}">
-                        <td>
-                            <a th:href="@{|/formUpdateAccident?id=${accident.id}|}"> <i class="fa fa-edit"></i> </a>
+                        <td nowrap>
+                            <a th:href="@{|/formUpdateAccident?id=${accident.id}|}"><i class="fa fa-edit"></i></a>
                             <span th:text="*{accident.id}" > 1 </span>
                         </td>
-                        <td th:text="*{accident.name}">
+                        <td th:text="*{accident.name}" nowrap>
                             name
                         </td>
                         <td th:text="*{accident.text}">
@@ -63,10 +64,10 @@
                         <td th:text="*{accident.address}">
                             address
                         </td>
-                        <td th:text="*{accident.type.name}">
+                        <td th:text="*{accident.type.name}" nowrap>
                             type
                         </td>
-                        <td>
+                        <td nowrap>
                             <div th:each="rule: *{accident.rules}">
                                 <span th:text="*{rule.name}"></span>
                             </div>
