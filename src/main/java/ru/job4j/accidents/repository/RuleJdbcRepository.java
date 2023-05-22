@@ -6,12 +6,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Rule;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-import static ru.job4j.accidents.query.AccidentQuery.*;
+import static ru.job4j.accidents.query.AccidentQuery.ID;
+import static ru.job4j.accidents.query.AccidentQuery.NAME;
 import static ru.job4j.accidents.query.RuleQuery.*;
 
 /**
@@ -23,13 +22,6 @@ public class RuleJdbcRepository implements RuleRepository {
     private final RowMapper<Rule> ruleRowMapper = (rs, rowNum) -> {
         Rule rule = new Rule();
         rule.setId(rs.getInt(ID));
-        rule.setName(rs.getString(NAME));
-        return rule;
-    };
-
-    private final RowMapper<Rule> accidentsRulesRowMapper = (rs, rowNum) -> {
-        Rule rule = new Rule();
-        rule.setId(rs.getInt(RULE_ID));
         rule.setName(rs.getString(NAME));
         return rule;
     };
@@ -52,11 +44,6 @@ public class RuleJdbcRepository implements RuleRepository {
         return Optional.ofNullable(
                 jdbc.queryForObject(SELECT_FROM_RULES_WHERE_ID, ruleRowMapper, id)
         );
-    }
-
-    public Set<Rule> getByAccidentId(int accidentId) {
-        List<Rule> ruleList = jdbc.query(SELECT_FROM_ACCIDENTS_RULES_WHERE_ACCIDENT_ID, accidentsRulesRowMapper, accidentId);
-        return new HashSet<>(ruleList);
     }
 
     public void saveAccidentsRules(int[] rIds, int id) {

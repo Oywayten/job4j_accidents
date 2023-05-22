@@ -1,26 +1,27 @@
 package ru.job4j.accidents.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 /**
- * Oywayten 19.05.2023.
+ * Oywayten 22.05.2023.
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "accident_types")
-public class AccidentType {
+@Table(name = "accidents_rules")
+public class AccidentsRules {
+
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
-    private String name;
+    @Column(name = "accident_id")
+    int accidentId;
+
+    @Column(name = "rule_id")
+    int ruleId;
 }

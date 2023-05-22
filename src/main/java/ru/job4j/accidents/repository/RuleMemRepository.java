@@ -35,14 +35,4 @@ public class RuleMemRepository implements RuleRepository {
     public Optional<Rule> getById(int id) {
         return Optional.ofNullable(rules.get(id));
     }
-
-    public Set<Rule> getByIds(int[] rIds) {
-        Set<Rule> ruleSet = new HashSet<>();
-        Optional<Rule> ruleOptional;
-        for (int rId : rIds) {
-            ruleOptional = getById(rId);
-            ruleOptional.ifPresent(ruleSet::add);
-        }
-        return ruleSet;
-    }
 }

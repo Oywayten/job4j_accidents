@@ -27,7 +27,7 @@ public class AccidentController {
     private final AccidentTypeService accidentTypeService;
     private final RuleService ruleService;
 
-    public AccidentController(@Qualifier("accidentJdbcService") AccidentService accidentService,
+    public AccidentController(@Qualifier("accidentHibernateService") AccidentService accidentService,
                               @Qualifier("accidentTypeJdbcService") AccidentTypeService accidentTypeService,
                               @Qualifier("ruleJdbcService") RuleService ruleService) {
         this.accidentService = accidentService;
