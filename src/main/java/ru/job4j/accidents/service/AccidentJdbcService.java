@@ -4,14 +4,11 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.dto.AccidentDto;
 import ru.job4j.accidents.mapper.AccidentMapper;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.AccidentJdbcRepository;
 import ru.job4j.accidents.repository.RuleJdbcRepository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Oywayten 19.05.2023.
@@ -32,16 +29,7 @@ public class AccidentJdbcService implements AccidentService {
 
     @Override
     public Collection<Accident> getAll() {
-        List<Accident> accidents = accidentJdbcRepository.getAll();
-        for (Accident accident : accidents) {
-            setRulesToAccident(accident);
-        }
-        return accidents;
-    }
-
-    private void setRulesToAccident(Accident accident) {
-        Set<Rule> rules = ruleJdbcRepository.getByAccidentId(accident.getId());
-        accident.setRules(rules);
+        return accidentJdbcRepository.getAll();
     }
 
     @Override
@@ -54,12 +42,7 @@ public class AccidentJdbcService implements AccidentService {
 
     @Override
     public Optional<Accident> getById(int id) {
-        Optional<Accident> accidentOptional = accidentJdbcRepository.getById(id);
-        if (accidentOptional.isPresent()) {
-            Accident accident = accidentOptional.get();
-            setRulesToAccident(accident);
-        }
-        return accidentOptional;
+        return accidentJdbcRepository.getById(id);
     }
 
     @Override
