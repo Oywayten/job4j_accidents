@@ -15,7 +15,7 @@ import static ru.job4j.accidents.util.Util.setUser;
 public class IndexController {
     private final AccidentService accidentService;
 
-    public IndexController(@Qualifier("accidentMemService") AccidentService accidentService) {
+    public IndexController(@Qualifier("accidentJdbcService") AccidentService accidentService) {
         this.accidentService = accidentService;
     }
 
