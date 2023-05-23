@@ -34,11 +34,10 @@ public class AccidentJdbcService implements AccidentService {
     }
 
     @Override
-    public Accident create(AccidentDto accidentDto) {
+    public void create(AccidentDto accidentDto) {
         Accident accident = accidentMapper.convertToAccident(accidentDto);
         accident = accidentJdbcRepository.save(accident);
         ruleJdbcRepository.saveAccidentsRules(accidentDto.getRIds(), accident.getId());
-        return accident;
     }
 
     @Override

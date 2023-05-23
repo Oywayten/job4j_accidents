@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface AccidentService {
     Collection<Accident> getAll();
 
-    Accident create(AccidentDto accidentDto);
+    void create(AccidentDto accidentDto);
 
     Optional<Accident> getById(int id);
 

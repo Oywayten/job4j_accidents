@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.AccidentRepository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,11 +22,10 @@ import static ru.job4j.accidents.query.AccidentQuery.*;
  */
 @Repository
 @AllArgsConstructor
-public class AccidentJdbcRepository implements AccidentRepository {
+public class AccidentJdbcRepository {
 
     private final JdbcTemplate jdbc;
 
-    @Override
     public Accident save(Accident accident) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbc.update(connection -> {
@@ -42,7 +40,6 @@ public class AccidentJdbcRepository implements AccidentRepository {
         return accident;
     }
 
-    @Override
     public Optional<Accident> getById(int id) {
         return Optional.ofNullable(
                 jdbc.query("SELECT *, at.name AS accident_type_name, r.id AS rule_id, r.name AS rule_name FROM accidents AS ac "
@@ -78,7 +75,6 @@ public class AccidentJdbcRepository implements AccidentRepository {
         return accident;
     }
 
-    @Override
     public boolean update(Accident newAccident) {
         int updated = jdbc.update(UPDATE_ACCIDENTS_SET_NAME_TEXT_ADDRESS_ACCIDENT_TYPE_ID_WHERE_ID,
                 newAccident.getName(), newAccident.getText(), newAccident.getAddress(), newAccident.getType().getId(),
@@ -86,7 +82,6 @@ public class AccidentJdbcRepository implements AccidentRepository {
         return updated > 0;
     }
 
-    @Override
     public Collection<Accident> getAll() {
         return jdbc.query("SELECT *, at.name AS accident_type_name, r.id AS rule_id, r.name AS rule_name FROM accidents AS ac "
                 + "JOIN accident_types AS at ON ac.accident_type_id = at.id "

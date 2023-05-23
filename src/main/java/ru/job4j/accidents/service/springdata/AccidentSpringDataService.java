@@ -1,4 +1,4 @@
-package ru.job4j.accidents.service.hbm;
+package ru.job4j.accidents.service.springdata;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import ru.job4j.accidents.dto.AccidentDto;
 import ru.job4j.accidents.mapper.AccidentMapper;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.hbm.AccidentHibernateRepository;
+import ru.job4j.accidents.repository.AccidentRepository;
 import ru.job4j.accidents.repository.jdbc.RuleJdbcRepository;
 import ru.job4j.accidents.service.AccidentService;
 
@@ -19,8 +19,8 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class AccidentHibernateService implements AccidentService {
-    private final AccidentHibernateRepository accidentHibernateRepository;
+public class AccidentSpringDataService implements AccidentService {
+    private final AccidentRepository accidentRepository;
     private final AccidentMapper accidentMapper;
     private final RuleJdbcRepository ruleJdbcRepository;
 
@@ -29,17 +29,16 @@ public class AccidentHibernateService implements AccidentService {
         Accident accident = accidentMapper.convertToAccident(accidentDto);
         Set<Rule> rules = ruleJdbcRepository.getByIds(accidentDto.getRIds());
         accident.setRules(rules);
-        accidentHibernateRepository.save(accident);
+        accidentRepository.save(accident);
     }
 
     @Override
     public Optional<Accident> getById(int id) {
-        return accidentHibernateRepository.getById(id);
+        return accidentRepository.findById(id);
     }
 
-    @Override
     public List<Accident> getAll() {
-        return accidentHibernateRepository.getAll();
+        return (List<Accident>) accidentRepository.findAll();
     }
 
     @Override
@@ -47,7 +46,8 @@ public class AccidentHibernateService implements AccidentService {
         Accident accident = accidentMapper.convertToAccident(accidentDto);
         Set<Rule> rules = ruleJdbcRepository.getByIds(accidentDto.getRIds());
         accident.setRules(rules);
-        return accidentHibernateRepository.update(accident);
+        Accident savedAccident = accidentRepository.save(accident);
+        return accident.equals(savedAccident);
     }
 }
 

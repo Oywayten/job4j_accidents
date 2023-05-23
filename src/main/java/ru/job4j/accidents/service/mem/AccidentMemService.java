@@ -47,11 +47,10 @@ public class AccidentMemService implements AccidentService {
     }
 
     @Override
-    public Accident create(AccidentDto accidentDto) {
+    public void create(AccidentDto accidentDto) {
         Accident accident = accidentMapper.convertToAccident(accidentDto);
         Set<Rule> rules = ruleMemRepository.getByIds(accidentDto.getRIds());
         accident.setRules(rules);
-        return accidentMemRepository.save(accident);
     }
 
     @Override
