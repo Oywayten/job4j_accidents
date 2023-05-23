@@ -1,76 +1,53 @@
 package ru.job4j.accidents.repository.hbm;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.repository.AccidentRepository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import static ru.job4j.accidents.query.AccidentQuery.SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T;
+import static ru.job4j.accidents.query.AccidentQuery.SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T_WHERE_A_ID_ID;
 
 /**
  * Oywayten 22.05.2023.
  */
 @Repository
 @AllArgsConstructor
-public class AccidentHibernateRepository {
-    private final SessionFactory sf;
+public class AccidentHibernateRepository implements AccidentRepository {
 
+    private final CrudRepository crudRepository;
+
+    @Override
     public Accident save(Accident accident) {
-        try (Session session = sf.openSession()) {
-            Transaction transaction = null;
-            try {
-                transaction = session.beginTransaction();
-                session.save(accident);
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction != null) {
-                    transaction.rollback();
-                }
-                throw e;
-            }
+        return crudRepository.tx(session -> {
+            session.persist(accident);
             return accident;
-        }
+        });
     }
 
+    @Override
     public Optional<Accident> getById(int id) {
-        try (Session session = sf.openSession()) {
-            return session.createQuery("FROM Accident AS a JOIN FETCH a.rules AS t WHERE a.id = :id", Accident.class)
-                    .setParameter("id", id)
-                    .uniqueResultOptional();
-        }
+        return crudRepository.optional(SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T_WHERE_A_ID_ID,
+                Accident.class, Map.of("id", id));
     }
 
+    @Override
     public List<Accident> getAll() {
-        try (Session session = sf.openSession()) {
-            return session.createQuery("SELECT DISTINCT a FROM Accident AS a JOIN FETCH a.rules AS t", Accident.class).getResultList();
-        }
+        return crudRepository.query(SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T, Accident.class);
     }
 
-
+    @Override
     public boolean update(Accident newAccident) {
-        try (Session session = sf.openSession()) {
-            Transaction transaction = null;
-            Accident accident;
-            try {
-                transaction = session.beginTransaction();
-                accident = session.get(Accident.class, newAccident.getId());
-                accident.setName(newAccident.getName());
-                accident.setText(newAccident.getText());
-                accident.setAddress(newAccident.getAddress());
-                accident.setType(newAccident.getType());
-                accident.setRules(newAccident.getRules());
-                accident = (Accident) session.merge(accident);
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction != null) {
-                    transaction.rollback();
-                }
-                throw e;
-            }
-            return newAccident.equals(accident);
+        boolean result = false;
+        Optional<Accident> dbAccidentOptional = getById(newAccident.getId());
+        if (dbAccidentOptional.isPresent()) {
+            crudRepository.run(session -> session.update(newAccident));
+            result = true;
         }
+        return result;
     }
 }

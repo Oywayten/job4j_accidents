@@ -18,9 +18,10 @@ public class AccidentQuery {
             String.format("%s %s", UPDATE_ACCIDENTS_SET_NAME_TEXT_ADDRESS_ACCIDENT_TYPE_ID, WHERE_ID);
     public static final String INSERT_INTO_ACCIDENTS =
             "INSERT INTO accidents (name, text, address, accident_type_id) VALUES (?, ?, ?, ?)";
-    public static final String SELECT_FROM_ACCIDENTS_AS_AC_JOIN_ACCIDENT_TYPES_WHERE_AC_ID =
-            "SELECT *, at.name AS accident_type_name FROM accidents AS ac JOIN accident_types AS at ON ac.accident_type_id = at.id WHERE ac.id = ?";
-
-    public static final String SELECT_FROM_ACCIDENTS_AS_AC_JOIN_ACCIDENT_TYPES =
-            "SELECT *, at.name AS accident_type_name FROM accidents AS ac JOIN accident_types AS at ON ac.accident_type_id = at.id";
+    public static final String SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T =
+            "SELECT DISTINCT a FROM Accident AS a JOIN FETCH a.rules AS t";
+    public static final String WHERE_A_ID_ID = "WHERE a.id = :id";
+    public static final String SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T_WHERE_A_ID_ID =
+            String.format("%s %s", SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T,
+                    WHERE_A_ID_ID);
 }
