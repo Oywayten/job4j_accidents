@@ -1,11 +1,12 @@
-package ru.job4j.accidents.service;
+package ru.job4j.accidents.service.jdbc;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.dto.AccidentDto;
 import ru.job4j.accidents.mapper.AccidentMapper;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.repository.AccidentJdbcRepository;
-import ru.job4j.accidents.repository.RuleJdbcRepository;
+import ru.job4j.accidents.repository.jdbc.AccidentJdbcRepository;
+import ru.job4j.accidents.repository.jdbc.RuleJdbcRepository;
+import ru.job4j.accidents.service.AccidentService;
 
 import java.util.Collection;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package ru.job4j.accidents.service;
+package ru.job4j.accidents.service.hbm;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,8 +6,9 @@ import ru.job4j.accidents.dto.AccidentDto;
 import ru.job4j.accidents.mapper.AccidentMapper;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.AccidentHibernateRepository;
-import ru.job4j.accidents.repository.RuleJdbcRepository;
+import ru.job4j.accidents.repository.hbm.AccidentHibernateRepository;
+import ru.job4j.accidents.repository.jdbc.RuleJdbcRepository;
+import ru.job4j.accidents.service.AccidentService;
 
 import java.util.List;
 import java.util.Optional;

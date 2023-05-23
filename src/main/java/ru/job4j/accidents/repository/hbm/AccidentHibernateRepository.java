@@ -1,4 +1,4 @@
-package ru.job4j.accidents.repository;
+package ru.job4j.accidents.repository.hbm;
 
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
