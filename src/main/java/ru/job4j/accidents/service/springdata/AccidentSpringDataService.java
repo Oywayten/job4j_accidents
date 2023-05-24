@@ -38,7 +38,7 @@ public class AccidentSpringDataService implements AccidentService {
     }
 
     public List<Accident> getAll() {
-        return (List<Accident>) accidentRepository.findAll();
+        return accidentRepository.findAll();
     }
 
     @Override

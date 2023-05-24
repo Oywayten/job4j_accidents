@@ -16,13 +16,13 @@
 </head>
 <body>
 <div class="container py-3 col-sm-2">
-    <a href="/reg">Registration</a>
+    <a href="/login">Authorization</a>
     <main class="form-signing">
-        <h1 class="h3 mb-3 fw-normal">Authorization</h1>
+        <h1 class="h3 mb-3 fw-normal">Registration</h1>
         <div th:if="${not #lists.isEmpty(errorMessage)}" class="alert alert-danger" role="alert">
             <span th:text="${errorMessage}"></span>
         </div>
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/reg}" method="post">
             <div class="mb-3">
                 <label for="username">User name
                     <input type="text" class="form-control" id="username" name="username">
@@ -34,7 +34,7 @@
                 </label>
             </div>
             <hr class="my-4">
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Authorization</button>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Registration</button>
         </form>
     </main>
 </div>
