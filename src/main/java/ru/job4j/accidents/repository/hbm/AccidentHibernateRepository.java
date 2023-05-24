@@ -28,12 +28,14 @@ public class AccidentHibernateRepository {
     }
 
     public Optional<Accident> getById(int id) {
-        return crudRepository.optional(SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T_WHERE_A_ID_ID,
+        return crudRepository.optional(
+                SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T_WHERE_A_ID_ID,
                 Accident.class, Map.of("id", id));
     }
 
     public List<Accident> getAll() {
-        return crudRepository.query(SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T, Accident.class);
+        return crudRepository.query(
+                SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T, Accident.class);
     }
 
     public boolean update(Accident newAccident) {

@@ -24,4 +24,13 @@ public class AccidentQuery {
     public static final String SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T_WHERE_A_ID_ID =
             String.format("%s %s", SELECT_DISTINCT_A_FROM_ACCIDENT_AS_A_JOIN_FETCH_A_RULES_AS_T,
                     WHERE_A_ID_ID);
+    public static final String GET_ALL_ACCIDENTS = """
+            SELECT *, at.name AS accident_type_name, r.id AS rule_id, r.name AS rule_name
+            FROM accidents AS ac
+            JOIN accident_types AS at ON ac.accident_type_id = at.id
+            JOIN accidents_rules ar on ac.id = ar.accident_id
+            JOIN rules r on ar.rule_id = r.id
+            """;
+    public static final String WHERE_AC_ID = "WHERE ac.id = ?";
+    public static final String GET_ACCIDENT_BY_ID = "%s%s".formatted(GET_ALL_ACCIDENTS, WHERE_AC_ID);
 }

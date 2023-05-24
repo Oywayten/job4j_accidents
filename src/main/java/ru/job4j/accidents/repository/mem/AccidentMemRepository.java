@@ -34,7 +34,8 @@ public class AccidentMemRepository {
     }
 
     public boolean update(Accident newAccident) {
-        Accident accident = accidents.computeIfPresent(newAccident.getId(), (integer, accident1) -> newAccident);
+        Accident accident =
+                accidents.computeIfPresent(newAccident.getId(), (integer, accident1) -> newAccident);
         return Objects.equals(accident, newAccident);
     }
 }

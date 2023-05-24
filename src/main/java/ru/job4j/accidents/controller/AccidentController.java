@@ -66,7 +66,8 @@ public class AccidentController {
     public String update(Model model, @ModelAttribute AccidentDto accidentDto) {
         if (!accidentService.update(accidentDto)) {
             setUser(model);
-            return goToError(model, String.format("Open edit form error for accident with id = %d", accidentDto.getId()));
+            return goToError(model, String.format("Open edit form error for accident with id = %d",
+                    accidentDto.getId()));
         }
         return "redirect:/index";
     }

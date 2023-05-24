@@ -22,7 +22,8 @@ public class AccidentMemService implements AccidentService {
     private final AccidentMapper accidentMapper;
     private final RuleMemRepository ruleMemRepository;
 
-    public AccidentMemService(AccidentMemRepository accidentMemRepository, AccidentMapper accidentMapper, RuleMemRepository ruleMemRepository) {
+    public AccidentMemService(AccidentMemRepository accidentMemRepository,
+                              AccidentMapper accidentMapper, RuleMemRepository ruleMemRepository) {
         this.accidentMapper = accidentMapper;
         this.accidentMemRepository = accidentMemRepository;
         this.ruleMemRepository = ruleMemRepository;

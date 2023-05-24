@@ -19,7 +19,8 @@ public class RegController {
     private final UserRepository users;
     private final AuthorityRepository authorities;
 
-    public RegController(PasswordEncoder encoder, UserRepository users, AuthorityRepository authorities) {
+    public RegController(
+            PasswordEncoder encoder, UserRepository users, AuthorityRepository authorities) {
         this.encoder = encoder;
         this.users = users;
         this.authorities = authorities;

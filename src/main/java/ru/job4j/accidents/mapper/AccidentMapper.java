@@ -16,7 +16,8 @@ import java.util.Optional;
 public class AccidentMapper {
     private final AccidentTypeRepository accidentTypeRepository;
 
-    public AccidentMapper(@Qualifier("accidentTypeJdbcRepository") AccidentTypeRepository accidentTypeRepository) {
+    public AccidentMapper(
+            @Qualifier("accidentTypeJdbcRepository") AccidentTypeRepository accidentTypeRepository) {
         this.accidentTypeRepository = accidentTypeRepository;
     }
 
