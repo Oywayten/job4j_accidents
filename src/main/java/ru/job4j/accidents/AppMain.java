@@ -11,5 +11,6 @@ public class AppMain {
     public static void main(String[] args) {
         SpringApplication.run(AppMain.class, args);
         System.out.println("Go to http://localhost:8093/");
+
     }
 }
