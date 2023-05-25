@@ -17,12 +17,12 @@ import java.util.Properties;
  * Oywayten 22.05.2023.
  */
 
-@Configuration
+//@Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 public class HbmConfig {
 
-    @Bean
+//    @Bean
     public LocalSessionFactoryBean sessionFactory(
             @Value("${hibernate.dialect}") String dialect, DataSource ds) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -34,7 +34,7 @@ public class HbmConfig {
         return sessionFactory;
     }
 
-    @Bean
+//    @Bean
     public PlatformTransactionManager htx(SessionFactory sf) {
         HibernateTransactionManager tx = new HibernateTransactionManager();
         tx.setSessionFactory(sf);
