@@ -22,9 +22,8 @@ public class UserSpringDataService {
             userRepository.save(user);
             result = true;
         } catch (DataIntegrityViolationException e) {
-            log.error("Error save user");
+            log.error("Error save user", e);
         }
         return result;
     }
 }
-
