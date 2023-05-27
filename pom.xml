@@ -16,7 +16,7 @@
     <name>job4j_accidents</name>
     <description>The project of fixing road offenses.</description>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
